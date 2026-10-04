@@ -51,7 +51,7 @@ export const journeyTimeline: JourneyNode[] = [
     title: 'ENGINEERING DIRECTION',
     subtitle: 'Building systems that connect technology to reality.',
     description: 'Moving toward multidisciplinary engineering where hardware, software, AI, robotics, and real-world constraints meet.',
-    tags: ['Vibathon 2026', 'Infothon 6.0', 'EdgeIQ', 'Thermospark', 'IVC Associate', 'Multidisciplinary'],
+    tags: ['Databricks Campus Hackathon', 'FusionX1.0', 'Hacksprint6.0', 'Thermospark-2026', 'IVC — CORE MEMBER', 'MULTIDISCIPLINARY SYSTEMS'],
     domain: 'SYSTEMS / DECIDE',
   }
 ];
