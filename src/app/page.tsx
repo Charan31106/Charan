@@ -9,12 +9,12 @@ import { BeyondBuilding } from "@/components/beyond-building";
 import { CurrentlyBuilding } from "@/components/currently-building";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
-import { ECEBackground } from "@/components/ece-background";
+import { ECEEngineeringEnvironment } from "@/components/ece-engineering-environment";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-transparent text-white selection:bg-electric-blue selection:text-white relative">
-      <ECEBackground />
+      <ECEEngineeringEnvironment />
       <Navigation />
       <Hero />
       <EngineeringIdentity />
