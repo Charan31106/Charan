@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Charan C — Electronics & Communication Engineering Student",
-  description: "Charan C is an Electronics & Communication Engineering student from Mysuru building systems across hardware, software, AI, robotics and real-world applications.",
+  title: "Charan C — ECE Engineer | Hardware × Software × AI × Robotics",
+  description: "Charan C is a 2nd-year Electronics & Communication Engineering student at VVCE, building multidisciplinary systems across hardware, software, AI, and robotics.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
