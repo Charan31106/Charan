@@ -59,7 +59,7 @@ export function CurrentlyBuilding() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="currently-building" className="py-24 relative bg-[#04070a] border-t border-navy-800/50">
+    <section id="currently-building" className="py-24 relative bg-transparent border-t border-navy-800/50">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
         <SectionHeader 
           number="07" 

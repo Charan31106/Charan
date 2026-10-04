@@ -73,10 +73,10 @@ export function EngineeringDNA() {
   };
 
   return (
-    <section id="dna" className="py-24 relative bg-[#060a10] border-y border-navy-800 overflow-hidden">
+    <section id="dna" className="py-24 relative bg-transparent border-y border-navy-800 overflow-hidden">
       {/* Background blueprint grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#060a10_80%)] opacity-90 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-navy-950)_80%)] opacity-90 pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">

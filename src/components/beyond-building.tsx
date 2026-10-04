@@ -42,7 +42,7 @@ export function BeyondBuilding() {
   );
 
   return (
-    <section id="beyond" className="py-24 relative bg-[#04070a]">
+    <section id="beyond" className="py-24 relative bg-transparent">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <SectionHeader 
@@ -180,7 +180,7 @@ export function BeyondBuilding() {
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 10 }}
-              className="relative w-full max-w-4xl max-h-[90vh] bg-[#04070a] border border-navy-700 rounded-sm shadow-2xl flex flex-col overflow-hidden"
+              className="relative w-full max-w-4xl max-h-[90vh] bg-navy-950 border border-navy-700 rounded-sm shadow-2xl flex flex-col overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center p-4 border-b border-navy-700/50 bg-navy-900/20">

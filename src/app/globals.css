@@ -11,10 +11,11 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   
-  --color-navy-900: #05070B;
-  --color-navy-800: #070A10;
-  --color-navy-700: #0B1018;
-  --color-navy-600: #101722;
+  --color-navy-950: #02040a;
+  --color-navy-900: #04060d;
+  --color-navy-800: #080c16;
+  --color-navy-700: #0d1322;
+  --color-navy-600: #131b2e;
   
   --color-electric-blue: #3b82f6;
   --color-cyan-accent: #06b6d4;
@@ -34,7 +35,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
-  background-color: var(--color-navy-900);
+  background-color: var(--color-navy-950);
 }
 
 ::selection {

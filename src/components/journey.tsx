@@ -11,7 +11,7 @@ export function Journey() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="journey" className="py-32 relative bg-[#060a10]">
+    <section id="journey" className="py-32 relative bg-transparent">
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
@@ -70,7 +70,7 @@ export function Journey() {
                   )}
 
                   {/* Node Dot */}
-                  <div className="flex-none mt-1 lg:mt-0 relative z-10 bg-[#060a10] p-1">
+                  <div className="flex-none mt-1 lg:mt-0 relative z-10 bg-navy-950 p-1">
                     <div className={cn(
                       "w-3 h-3 rounded-full border-2 transition-all duration-300",
                       isHovered ? "border-electric-blue bg-electric-blue/20 scale-150 shadow-[0_0_15px_rgba(59,130,246,0.5)]" : "border-navy-500 bg-navy-900"
