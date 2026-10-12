@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { personalInfo } from "@/data/socials";
 import { SectionHeader } from "./ui/section-header";
 
 export function EngineeringIdentity() {
@@ -25,7 +24,7 @@ export function EngineeringIdentity() {
               Building at the intersection of hardware, software, AI and real-world systems.
             </h3>
             <p className="text-xl text-gray-400 font-light leading-relaxed mb-6">
-              My engineering approach doesn't stay inside one box. I explore physical computing, build intelligent software, and experiment with robotics and real-world automation. 
+              My engineering approach doesn&apos;t stay inside one box. I explore physical computing, build intelligent software, and experiment with robotics and real-world automation. 
             </p>
             <p className="text-lg text-gray-500 font-light leading-relaxed">
               The projects presented here demonstrate my ongoing exploration across accessibility, agriculture, disaster monitoring, space systems, and campus technology. I am learning by building.
@@ -41,7 +40,7 @@ export function EngineeringIdentity() {
           >
             <div className="text-xs font-mono tracking-widest text-electric-blue mb-2 pb-2 border-b border-navy-700">PRIMARY FOCUS</div>
             <div className="grid grid-cols-2 gap-4">
-              {['HARDWARE', 'SOFTWARE', 'AI', 'ROBOTICS', 'AUTOMATION', 'REAL-WORLD SYSTEMS'].map((focus, i) => (
+              {['HARDWARE', 'SOFTWARE', 'AI', 'ROBOTICS', 'AUTOMATION', 'REAL-WORLD SYSTEMS'].map((focus) => (
                 <div key={focus} className="group border border-navy-700 bg-navy-800/20 hover:bg-navy-700/50 hover:border-electric-blue/50 p-5 rounded-sm flex items-center transition-all duration-300 cursor-default">
                   <div className="w-1.5 h-1.5 bg-cyan-accent group-hover:bg-electric-blue mr-3 rounded-full group-hover:scale-150 transition-all duration-300" />
                   <span className="text-xs md:text-sm font-mono text-gray-300 tracking-wider group-hover:text-white transition-colors">{focus}</span>

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 const GlowFilter = () => (
   <defs>
@@ -66,13 +65,6 @@ const FixedAtmosphereAndGrid = () => (
 
 export function ECEEngineeringEnvironment() {
   const prefersReducedMotion = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   return (
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden text-electric-blue">

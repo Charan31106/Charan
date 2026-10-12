@@ -183,7 +183,7 @@ export function CurrentlyBuilding() {
             </div>
 
             <div className="flex flex-col gap-8">
-              {directions.map((dir, i) => (
+              {directions.map((dir) => (
                 <div key={dir.id} className="relative">
                   {/* Branch line & Node */}
                   <div className="absolute -left-4 top-8 w-4 h-px bg-navy-700" />
@@ -255,7 +255,7 @@ export function CurrentlyBuilding() {
                CURRENT ENGINEERING QUESTION
              </h4>
              <p className="text-sm md:text-base text-gray-300 font-light italic max-w-3xl leading-relaxed">
-               "How can hardware, intelligent software and autonomous systems work together to solve real-world problems?"
+               &quot;How can hardware, intelligent software and autonomous systems work together to solve real-world problems?&quot;
              </p>
           </div>
 

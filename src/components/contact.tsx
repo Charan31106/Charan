@@ -9,7 +9,7 @@ export function Contact() {
     <section id="contact" className="py-24 relative border-t border-navy-700 bg-transparent">
       <div className="container mx-auto px-6 md:px-12 text-center flex flex-col items-center">
         <h2 className="text-4xl md:text-5xl font-light text-white mb-6 uppercase tracking-wide">
-          Let's Build Something
+          Let&apos;s Build Something
         </h2>
         <p className="text-gray-400 font-light text-lg mb-12 max-w-xl">
           Interested in hardware, software, AI, robotics or building something ambitious?
