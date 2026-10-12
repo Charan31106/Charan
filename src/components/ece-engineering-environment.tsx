@@ -101,13 +101,13 @@ export function ECEEngineeringEnvironment() {
           )}
         </svg>
 
-        {/* Right Side Oscilloscope (Hidden on Mobile) */}
-        <svg className="hidden lg:block absolute top-[20%] right-0 w-[400px] h-[200px]" viewBox="0 0 400 200">
-          <g stroke="currentColor" fill="none" strokeWidth="1" className="text-electric-blue opacity-60">
-             <path d="M 400,100 L 300,100 L 280,70 L 260,130 L 240,100 L 150,100 L 100,150 L 0,150" />
-             <circle cx="150" cy="100" r="2" fill="currentColor" />
+        {/* Peripheral Telemetry Trace (Subtle) */}
+        <svg className="hidden lg:block absolute top-[15%] right-0 w-[300px] h-[150px] opacity-20 pointer-events-none" viewBox="0 0 300 150">
+          <g stroke="currentColor" fill="none" strokeWidth="1" className="text-navy-400">
+             <path d="M 300,50 L 180,50 L 140,90 L 40,90" strokeDasharray="3 6" />
+             <circle cx="40" cy="90" r="2" fill="currentColor" />
           </g>
-          <text x="160" y="93" fill="currentColor" className="text-[9px] font-mono tracking-widest opacity-80">SYNC SIGNAL</text>
+          <text x="60" y="85" fill="currentColor" className="text-[8px] font-mono tracking-widest opacity-40">SYS.BUS_EXT</text>
         </svg>
       </div>
 
