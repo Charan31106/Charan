@@ -38,8 +38,8 @@ export function SystemsGrid() {
               className={cn(
                 "px-4 py-2 text-xs font-mono tracking-widest transition-all duration-300 border rounded-sm",
                 activeFilter === filter 
-                  ? "bg-electric-blue/10 border-electric-blue text-electric-blue" 
-                  : "border-navy-700 text-gray-500 hover:text-gray-300 hover:border-gray-700 bg-transparent"
+                  ? "bg-cyan-500/15 border-cyan-400 text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.2)]" 
+                  : "border-cyan-500/20 text-gray-400 hover:text-gray-200 hover:border-cyan-400/50 bg-navy-900/60 backdrop-blur-sm"
               )}
             >
               {filter}
@@ -93,17 +93,17 @@ function ProjectCard({ project, index, isFeatured, onClick }: { project: typeof 
   const getVisualBackground = () => {
     switch (project.visualType) {
       case 'orbital-visualization':
-        return "bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-navy-700 via-navy-900 to-navy-900 border-t-electric-blue/50";
+        return "bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-navy-800/90 via-navy-900/85 to-navy-950/90 border-t-cyan-400/60 border-navy-700/60";
       case 'sensor-network':
-        return "bg-[linear-gradient(to_bottom_right,_var(--tw-gradient-stops))] from-navy-800 to-navy-900 border-l-cyan-accent/50";
+        return "bg-[linear-gradient(to_bottom_right,_var(--tw-gradient-stops))] from-navy-800/90 to-navy-950/90 border-l-cyan-accent/60 border-navy-700/60";
       case 'campus-visualization':
-        return "bg-navy-800/80 border-b-violet-accent/50";
+        return "bg-navy-900/85 border-b-violet-accent/60 border-navy-700/60";
       case 'agriculture-interface':
-        return "bg-navy-800/60 border-t-green-500/30";
+        return "bg-navy-900/85 border-t-emerald-400/50 border-navy-700/60";
       case 'accessibility-interface':
-        return "bg-navy-800/40 border-l-blue-400/30";
+        return "bg-navy-900/85 border-l-sky-400/50 border-navy-700/60";
       default:
-        return "bg-navy-800/50 border-navy-700 hover:border-navy-500";
+        return "bg-navy-900/85 border-navy-700/60 hover:border-cyan-400/50";
     }
   };
 
@@ -116,11 +116,11 @@ function ProjectCard({ project, index, isFeatured, onClick }: { project: typeof 
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className={cn(
-        "group relative flex flex-col justify-between p-6 md:p-8 border rounded-sm transition-all duration-300 cursor-pointer overflow-hidden hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] w-full hover:border-electric-blue/50",
+        "group relative flex flex-col justify-between p-6 md:p-8 border rounded-sm transition-all duration-300 cursor-pointer overflow-hidden hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(6,14,34,0.7)] w-full hover:border-cyan-400/60 backdrop-blur-md",
         isFeatured ? "min-h-[440px]" : "min-h-[360px]",
         getVisualBackground(),
         project.status === 'HACKATHON PROJECT' || project.status === 'PROTOTYPE' 
-          ? "opacity-80 hover:opacity-100 grayscale-[30%] hover:grayscale-0"
+          ? "opacity-90 hover:opacity-100"
           : ""
       )}
     >
@@ -157,12 +157,12 @@ function ProjectCard({ project, index, isFeatured, onClick }: { project: typeof 
 
         <div className="mt-6 flex flex-wrap gap-2 mt-auto pt-6">
           {project.technologies.slice(0, 4).map(tech => (
-            <span key={tech} className="text-[11px] text-gray-400 bg-navy-900/80 px-2 py-1 rounded-sm border border-navy-700/50">
+            <span key={tech} className="text-[11px] font-mono text-gray-300 bg-navy-950/80 px-2 py-1 rounded-sm border border-cyan-500/20">
               {tech}
             </span>
           ))}
           {project.technologies.length > 4 && (
-            <span className="text-[11px] text-gray-500 px-1 py-1">+{project.technologies.length - 4}</span>
+            <span className="text-[11px] font-mono text-cyan-400/80 px-1.5 py-1 bg-navy-950/60 rounded-sm border border-cyan-500/20">+{project.technologies.length - 4}</span>
           )}
         </div>
       </div>

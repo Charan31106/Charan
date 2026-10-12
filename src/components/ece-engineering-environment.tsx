@@ -2,64 +2,96 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
-const GlowFilter = () => (
+const GlowFilters = () => (
   <defs>
-    <filter id="trace-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
+    <filter id="env-trace-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
-    <filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
+    <filter id="env-node-glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
+    <linearGradient id="trace-cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.8" />
+      <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.3" />
+    </linearGradient>
+    <linearGradient id="trace-blue-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.7" />
+      <stop offset="100%" stopColor="#2563eb" stopOpacity="0.2" />
+    </linearGradient>
+    <linearGradient id="bus-copper-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.4" />
+      <stop offset="50%" stopColor="#22d3ee" stopOpacity="0.6" />
+      <stop offset="100%" stopColor="#818cf8" stopOpacity="0.3" />
+    </linearGradient>
   </defs>
 );
 
 const FixedAtmosphereAndGrid = () => (
-  <div className="fixed inset-0 pointer-events-none z-0">
-    {/* Atmospheric Depth Gradients */}
-    <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vh] bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.04)_0%,transparent_70%)] mix-blend-screen" />
-    <div className="absolute top-[40%] right-[-10%] w-[60vw] h-[60vh] bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03)_0%,transparent_60%)] mix-blend-screen" />
-    <div className="absolute bottom-[-10%] left-[20%] w-[70vw] h-[50vh] bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.025)_0%,transparent_70%)] mix-blend-screen" />
+  <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    {/* Deep Midnight Navy Base Radial Atmosphere Pools */}
+    <div className="absolute top-[-5%] left-[-5%] w-[65vw] h-[65vh] bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.08)_0%,rgba(14,32,76,0.35)_45%,transparent_75%)] mix-blend-screen" />
+    <div className="absolute top-[28%] right-[-10%] w-[70vw] h-[70vh] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.09)_0%,rgba(18,40,94,0.30)_50%,transparent_75%)] mix-blend-screen" />
+    <div className="absolute top-[58%] left-[-8%] w-[65vw] h-[65vh] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.07)_0%,rgba(16,35,85,0.25)_50%,transparent_75%)] mix-blend-screen" />
+    <div className="absolute bottom-[-10%] right-[10%] w-[75vw] h-[65vh] bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.07)_0%,rgba(20,45,105,0.30)_50%,transparent_75%)] mix-blend-screen" />
 
-    {/* Macro Grid */}
+    {/* Primary 120px Macro Blueprint Grid with Crosshairs */}
     <div 
-      className="absolute inset-0 opacity-[0.03]"
+      className="absolute inset-0 opacity-[0.065]"
       style={{
         backgroundImage: `
-          linear-gradient(to right, #3b82f6 1px, transparent 1px),
-          linear-gradient(to bottom, #3b82f6 1px, transparent 1px)
+          linear-gradient(to right, #38bdf8 1px, transparent 1px),
+          linear-gradient(to bottom, #38bdf8 1px, transparent 1px)
         `,
-        backgroundSize: '128px 128px',
-        maskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)'
+        backgroundSize: "120px 120px",
       }}
     />
     
-    {/* Fine Grid (Hidden on mobile) */}
+    {/* Secondary 24px Micro Engineering Grid */}
     <div 
-      className="hidden md:block absolute inset-0 opacity-[0.02]"
+      className="hidden md:block absolute inset-0 opacity-[0.035]"
       style={{
         backgroundImage: `
-          linear-gradient(to right, #06b6d4 1px, transparent 1px),
-          linear-gradient(to bottom, #06b6d4 1px, transparent 1px)
+          linear-gradient(to right, #22d3ee 1px, transparent 1px),
+          linear-gradient(to bottom, #22d3ee 1px, transparent 1px)
         `,
-        backgroundSize: '32px 32px',
-        maskImage: 'radial-gradient(ellipse at 80% 20%, black 10%, transparent 60%)'
+        backgroundSize: "24px 24px",
       }}
     />
 
-    {/* Micro Grid (Center focus) */}
-    <div 
-      className="hidden lg:block absolute inset-0 opacity-[0.015]"
-      style={{
-        backgroundImage: `
-          linear-gradient(to right, #8b5cf6 1px, transparent 1px),
-          linear-gradient(to bottom, #8b5cf6 1px, transparent 1px)
-        `,
-        backgroundSize: '8px 8px',
-        maskImage: 'radial-gradient(ellipse at 30% 60%, black 5%, transparent 30%)'
-      }}
-    />
+    {/* Viewport Margin Telemetry Rails (Left & Right Edge Calibrations) */}
+    <div className="hidden xl:flex flex-col justify-between absolute left-3 top-24 bottom-12 w-6 text-[8px] font-mono text-cyan-400/40 select-none">
+      <div className="flex flex-col gap-8">
+        <span className="tracking-widest rotate-90 origin-left mt-4">REF:00.00</span>
+        <div className="w-2 h-px bg-cyan-400/40" />
+        <span className="tracking-widest rotate-90 origin-left">SYS.3V3</span>
+        <div className="w-3 h-px bg-cyan-400/50" />
+        <span className="tracking-widest rotate-90 origin-left">BUS.A</span>
+      </div>
+      <div className="flex flex-col gap-8 items-start">
+        <div className="w-3 h-px bg-cyan-400/50" />
+        <span className="tracking-widest rotate-90 origin-left">GND.0V</span>
+        <div className="w-2 h-px bg-cyan-400/40" />
+        <span className="tracking-widest rotate-90 origin-left mb-6">TERM:120R</span>
+      </div>
+    </div>
+
+    <div className="hidden xl:flex flex-col justify-between items-end absolute right-3 top-24 bottom-12 w-6 text-[8px] font-mono text-electric-blue/40 select-none">
+      <div className="flex flex-col gap-8 items-end">
+        <span className="tracking-widest -rotate-90 origin-right mt-4">RF:2.4GHz</span>
+        <div className="w-2 h-px bg-electric-blue/40" />
+        <span className="tracking-widest -rotate-90 origin-right">ADC:12BIT</span>
+        <div className="w-3 h-px bg-electric-blue/50" />
+        <span className="tracking-widest -rotate-90 origin-right">CLK:160M</span>
+      </div>
+      <div className="flex flex-col gap-8 items-end">
+        <div className="w-3 h-px bg-electric-blue/50" />
+        <span className="tracking-widest -rotate-90 origin-right">DECIDE</span>
+        <div className="w-2 h-px bg-electric-blue/40" />
+        <span className="tracking-widest -rotate-90 origin-right mb-6">SYS.SYNC</span>
+      </div>
+    </div>
   </div>
 );
 
@@ -67,143 +99,332 @@ export function ECEEngineeringEnvironment() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden text-electric-blue">
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden text-cyan-accent">
       <FixedAtmosphereAndGrid />
 
-      {/* ANCHOR 01: HERO MODULE (top: 0) */}
-      <div className="absolute top-0 left-0 w-full h-[1200px] opacity-30">
-        {/* Left Side Architecture */}
-        <svg className="absolute top-0 left-0 w-[500px] h-[500px]" viewBox="0 0 500 500">
-          <GlowFilter />
-          <g stroke="currentColor" fill="none" strokeWidth="1" strokeLinecap="square" className="text-cyan-accent">
-             <path d="M 0,200 L 150,200 L 200,250 L 400,250" />
-             <path d="M 150,200 L 150,100 L 300,100" />
-             <rect x="298" y="98" width="16" height="16" fill="rgba(6,182,212,0.1)" stroke="currentColor" />
-             <circle cx="400" cy="250" r="3" fill="currentColor" />
+      {/* ========================================================
+          ZONE 01: HERO & NAVIGATION REGION (0px - 1400px)
+         ======================================================== */}
+      <div className="absolute top-0 left-0 w-full h-[1400px]">
+        {/* Left Peripheral Bus & Test Pad Array */}
+        <svg className="absolute top-12 left-0 w-[420px] h-[750px]" viewBox="0 0 420 750" fill="none">
+          <GlowFilters />
+          
+          {/* Main Bus Rails with 45-degree chamfers */}
+          <path d="M 0,80 L 160,80 L 220,140 L 220,480 L 260,520 L 340,520" stroke="url(#trace-cyan-grad)" strokeWidth="1.5" />
+          <path d="M 0,95 L 150,95 L 205,150 L 205,475 L 245,515 L 340,515" stroke="url(#trace-blue-grad)" strokeWidth="1.2" strokeDasharray="6 3" />
+          <path d="M 0,110 L 140,110 L 190,160 L 190,460 L 230,500 L 320,500" stroke="#38bdf8" strokeWidth="0.8" opacity="0.4" />
+
+          {/* Test Pads and Vias */}
+          <g fill="#22d3ee" opacity="0.8">
+            <circle cx="340" cy="520" r="4" />
+            <circle cx="340" cy="520" r="1.5" fill="#060e22" />
+            <circle cx="340" cy="515" r="3" />
+            <circle cx="320" cy="500" r="2.5" />
+            
+            {/* Breakout Test Point Labels */}
+            <circle cx="220" cy="240" r="3" />
+            <circle cx="220" cy="320" r="3" />
+            <circle cx="220" cy="400" r="3" />
           </g>
-          <g fill="currentColor" className="text-[10px] font-mono tracking-widest opacity-60">
-             <text x="325" y="105">SYS-01</text>
-             <text x="325" y="118">CORE</text>
+
+          {/* Silkscreen Annotations */}
+          <g fill="#38bdf8" className="text-[8px] font-mono tracking-widest" opacity="0.65">
+            <text x="232" y="243">TP101: VDD_CORE</text>
+            <text x="232" y="323">TP102: SPI_MOSI</text>
+            <text x="232" y="403">TP103: I2C_SDA</text>
+            <text x="350" y="523">BUS_OUT_A</text>
           </g>
+
+          {/* Meander Delay-Match Tuning Waveform */}
+          <path 
+            d="M 20,280 L 80,280 L 80,295 L 40,295 L 40,310 L 80,310 L 80,325 L 40,325 L 40,340 L 80,340 L 120,340" 
+            stroke="#22d3ee" 
+            strokeWidth="1" 
+            opacity="0.35" 
+          />
+          <text x="20" y="272" fill="#22d3ee" className="text-[7px] font-mono tracking-widest" opacity="0.5">DELAY_MATCH_50Ω</text>
+
+          {/* Animated Electron Packet */}
           {!prefersReducedMotion && (
-            <motion.circle r="2" fill="#06b6d4" filter="url(#trace-glow)"
-              animate={{ cx: [0, 150, 200, 400, 400], cy: [200, 200, 250, 250, 250], opacity: [0, 1, 1, 1, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
+            <motion.circle 
+              r="3" 
+              fill="#22d3ee" 
+              filter="url(#env-trace-glow)"
+              animate={{
+                cx: [0, 160, 220, 220, 260, 340],
+                cy: [80, 80, 140, 480, 520, 520],
+                opacity: [0, 1, 1, 1, 1, 0]
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
             />
           )}
         </svg>
 
-        {/* Peripheral Telemetry Trace (Subtle) */}
-        <svg className="hidden lg:block absolute top-[15%] right-0 w-[300px] h-[150px] opacity-20 pointer-events-none" viewBox="0 0 300 150">
-          <g stroke="currentColor" fill="none" strokeWidth="1" className="text-navy-400">
-             <path d="M 300,50 L 180,50 L 140,90 L 40,90" strokeDasharray="3 6" />
-             <circle cx="40" cy="90" r="2" fill="currentColor" />
+        {/* Right Peripheral Ground Plane & Bus Connector */}
+        <svg className="hidden lg:block absolute top-24 right-0 w-[380px] h-[600px]" viewBox="0 0 380 600" fill="none">
+          <GlowFilters />
+          <path d="M 380,120 L 220,120 L 160,180 L 160,420 L 80,500 L 0,500" stroke="url(#trace-cyan-grad)" strokeWidth="1.2" />
+          <path d="M 380,135 L 230,135 L 175,190 L 175,410 L 95,490 L 0,490" stroke="#38bdf8" strokeWidth="1" strokeDasharray="4 4" opacity="0.4" />
+          
+          <g fill="#38bdf8" opacity="0.6">
+            <circle cx="160" cy="180" r="3" />
+            <circle cx="160" cy="300" r="3" />
+            <circle cx="80" cy="500" r="4" />
+            <circle cx="80" cy="500" r="1.5" fill="#060e22" />
           </g>
-          <text x="60" y="85" fill="currentColor" className="text-[8px] font-mono tracking-widest opacity-40">SYS.BUS_EXT</text>
+          
+          <text x="175" y="303" fill="#38bdf8" className="text-[8px] font-mono tracking-widest" opacity="0.6">EXT_BUS_RX</text>
+          <text x="95" y="503" fill="#38bdf8" className="text-[8px] font-mono tracking-widest" opacity="0.6">JTAG_TCK</text>
         </svg>
       </div>
 
-      {/* ANCHOR 02: IDENTITY / DNA ARCHITECTURE (top: 15%) */}
-      <div className="absolute top-[15%] left-0 w-full h-[1500px] opacity-25">
-         {/* Radial / Processor Geometry (Right side) */}
-         <svg className="hidden lg:block absolute top-[10%] right-[-100px] w-[600px] h-[600px]" viewBox="0 0 600 600">
-            <g stroke="currentColor" fill="none" strokeWidth="1">
-              <circle cx="300" cy="300" r="200" strokeDasharray="4 12" className="text-electric-blue opacity-50" />
-              <circle cx="300" cy="300" r="150" strokeWidth="0.5" className="opacity-30" />
-              <path d="M 100,300 L 0,300" strokeWidth="1.5" className="text-cyan-accent" />
+      {/* ========================================================
+          ZONE 02: ABOUT / ENGINEERING IDENTITY (1200px - 2600px)
+         ======================================================== */}
+      <div className="absolute top-[1200px] left-0 w-full h-[1400px]">
+        {/* Left Side: Multi-Channel ADC & Differential Lines */}
+        <svg className="absolute top-10 left-0 w-[450px] h-[650px]" viewBox="0 0 450 650" fill="none">
+          <GlowFilters />
+          
+          {/* Quad Data Bus */}
+          <g strokeWidth="1" opacity="0.6">
+            <path d="M 0,160 L 180,160 L 230,210 L 230,520" stroke="#22d3ee" />
+            <path d="M 0,175 L 170,175 L 215,220 L 215,520" stroke="#38bdf8" strokeDasharray="5 3" />
+            <path d="M 0,190 L 160,190 L 200,230 L 200,520" stroke="#818cf8" />
+            <path d="M 0,205 L 150,205 L 185,240 L 185,520" stroke="#2563eb" />
+          </g>
+
+          {/* Via Matrix & Test Header */}
+          <rect x="240" y="280" width="80" height="40" stroke="#38bdf8" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" />
+          <text x="248" y="304" fill="#38bdf8" className="text-[8px] font-mono tracking-widest" opacity="0.7">SENSE_FRONTEND</text>
+          
+          {/* Termination Vias */}
+          <g fill="#22d3ee" opacity="0.75">
+            <circle cx="230" cy="520" r="3" />
+            <circle cx="215" cy="520" r="3" />
+            <circle cx="200" cy="520" r="3" />
+            <circle cx="185" cy="520" r="3" />
+          </g>
+
+          {!prefersReducedMotion && (
+            <motion.circle 
+              r="2.5" 
+              fill="#22d3ee" 
+              filter="url(#env-trace-glow)"
+              animate={{
+                cx: [0, 180, 230, 230],
+                cy: [160, 160, 210, 520],
+                opacity: [0, 1, 1, 0]
+              }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear", delay: 1 }}
+            />
+          )}
+        </svg>
+
+        {/* Right Side: IC Footprint & Clock Generator Geometry */}
+        <svg className="hidden md:block absolute top-20 right-0 w-[420px] h-[550px]" viewBox="0 0 420 550" fill="none">
+          {/* QFP-32 Footprint Silhouette */}
+          <rect x="220" y="160" width="100" height="100" stroke="#38bdf8" strokeWidth="1.2" opacity="0.4" />
+          <circle cx="235" cy="175" r="4" fill="#22d3ee" opacity="0.7" />
+          <text x="248" y="215" fill="#38bdf8" className="text-[9px] font-mono tracking-widest" opacity="0.8">MCU_CORE</text>
+          <text x="248" y="228" fill="#38bdf8" className="text-[7px] font-mono tracking-widest" opacity="0.5">32-BIT RISC-V</text>
+
+          {/* Fanout Pin Traces */}
+          <path d="M 220,190 L 160,190 L 120,230 L 120,400" stroke="#22d3ee" strokeWidth="1" opacity="0.5" />
+          <path d="M 220,210 L 170,210 L 140,240 L 140,400" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
+          <path d="M 270,160 L 270,90 L 320,40" stroke="#38bdf8" strokeWidth="1" opacity="0.4" />
+
+          {/* Test Pin Pad */}
+          <circle cx="120" cy="400" r="3.5" fill="#22d3ee" opacity="0.8" />
+          <text x="60" y="403" fill="#22d3ee" className="text-[8px] font-mono tracking-widest" opacity="0.7">GPIO_INT</text>
+        </svg>
+      </div>
+
+      {/* ========================================================
+          ZONE 03: SYSTEMS I'VE BUILT (2400px - 4800px)
+         ======================================================== */}
+      <div className="absolute top-[2400px] left-0 w-full h-[2400px]">
+        {/* Continuous Backbone Bus Spine on Right Side */}
+        <svg className="hidden md:block absolute top-0 right-0 w-[300px] h-[1800px]" viewBox="0 0 300 1800" fill="none">
+          <GlowFilters />
+          {/* Main vertical bus line with periodic taps */}
+          <path d="M 180,0 L 180,1800" stroke="url(#bus-copper-grad)" strokeWidth="1.8" />
+          <path d="M 195,0 L 195,1800" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="8 4" opacity="0.35" />
+
+          {/* Tap Off Stubs into System Cards */}
+          <path d="M 180,300 L 80,300 L 40,340 L 0,340" stroke="#22d3ee" strokeWidth="1.2" opacity="0.6" />
+          <circle cx="80" cy="300" r="3" fill="#22d3ee" opacity="0.8" />
+          <text x="92" y="296" fill="#22d3ee" className="text-[8px] font-mono tracking-widest" opacity="0.7">NODE_01: DEBRISEYE</text>
+
+          <path d="M 180,750 L 100,750 L 60,790 L 0,790" stroke="#38bdf8" strokeWidth="1.2" opacity="0.6" />
+          <circle cx="100" cy="750" r="3" fill="#38bdf8" opacity="0.8" />
+          <text x="112" y="746" fill="#38bdf8" className="text-[8px] font-mono tracking-widest" opacity="0.7">NODE_02: DISASTER_MON</text>
+
+          <path d="M 180,1200 L 90,1200 L 50,1240 L 0,1240" stroke="#818cf8" strokeWidth="1.2" opacity="0.6" />
+          <circle cx="90" cy="1200" r="3" fill="#818cf8" opacity="0.8" />
+          <text x="102" y="1196" fill="#818cf8" className="text-[8px] font-mono tracking-widest" opacity="0.7">NODE_03: KRISHI_IOT</text>
+
+          {!prefersReducedMotion && (
+            <motion.circle 
+              r="3" 
+              fill="#22d3ee" 
+              filter="url(#env-trace-glow)"
+              animate={{ cy: [0, 1800], cx: [180, 180], opacity: [0, 1, 1, 0] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            />
+          )}
+        </svg>
+
+        {/* Left Side: Ground Stitching & Logic Signal Matrix */}
+        <svg className="absolute top-[200px] left-0 w-[350px] h-[1200px]" viewBox="0 0 350 1200" fill="none">
+          <path d="M 0,200 L 120,200 L 170,250 L 170,900 L 220,950 L 300,950" stroke="url(#trace-cyan-grad)" strokeWidth="1.2" />
+          <circle cx="300" cy="950" r="4" fill="#22d3ee" opacity="0.8" />
+          <circle cx="300" cy="950" r="1.5" fill="#060e22" />
+          <text x="210" y="940" fill="#22d3ee" className="text-[8px] font-mono tracking-widest" opacity="0.7">FPGA_FABRIC_SYNC</text>
+
+          {/* Ground Stitching Via Pair Column */}
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+            <g key={i} transform={`translate(40, ${350 + i * 60})`} opacity="0.4">
+              <circle cx="0" cy="0" r="2.5" fill="#38bdf8" />
+              <circle cx="16" cy="0" r="2.5" fill="#38bdf8" />
+              <line x1="0" y1="0" x2="16" y2="0" stroke="#38bdf8" strokeWidth="0.5" />
             </g>
-            <text x="10" y="290" fill="currentColor" className="text-[10px] font-mono tracking-widest opacity-90 text-cyan-accent">INTELLIGENCE NODE</text>
-         </svg>
+          ))}
+          <text x="30" y="850" fill="#38bdf8" className="text-[7px] font-mono tracking-widest rotate-90" opacity="0.5">GND_STITCH_50MIL</text>
+        </svg>
+      </div>
 
-         {/* Data Bus Motif (Left side) */}
-         <svg className="absolute top-[30%] left-0 w-[300px] h-[500px]" viewBox="0 0 300 500">
-            <GlowFilter />
-            <g stroke="currentColor" fill="none" strokeLinecap="square">
-              <path d="M 0,100 L 100,100 L 150,150 L 150,400" strokeWidth="2" className="opacity-40 text-electric-blue" />
-              <path d="M 0,115 L 90,115 L 140,165 L 140,400" strokeWidth="2" className="opacity-40 text-cyan-accent" />
-              <path d="M 0,130 L 80,130 L 130,180 L 130,400" strokeWidth="2" className="opacity-40 text-violet-accent" />
+      {/* ========================================================
+          ZONE 04: ENGINEERING DNA & ARCHITECTURE (4600px - 6200px)
+         ======================================================== */}
+      <div className="absolute top-[4600px] left-0 w-full h-[1600px]">
+        {/* Core Radiating Bus Trunks */}
+        <svg className="absolute top-0 left-0 w-full h-[800px]" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
+          <GlowFilters />
+          
+          {/* Subtle Concentric Rings behind Core */}
+          <circle cx="720" cy="180" r="160" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="4 8" opacity="0.25" />
+          <circle cx="720" cy="180" r="240" stroke="#22d3ee" strokeWidth="0.5" opacity="0.15" />
+
+          {/* Left Wing Bus Breakout (Hardware & Software) */}
+          <path d="M 680,180 L 400,180 L 320,260 L 320,600" stroke="#22d3ee" strokeWidth="1.2" opacity="0.45" />
+          <path d="M 670,195 L 420,195 L 350,265 L 350,600" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="4 4" opacity="0.35" />
+
+          {/* Right Wing Bus Breakout (Intelligence & Tools) */}
+          <path d="M 760,180 L 1040,180 L 1120,260 L 1120,600" stroke="#818cf8" strokeWidth="1.2" opacity="0.45" />
+          <path d="M 770,195 L 1020,195 L 1090,265 L 1090,600" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="4 4" opacity="0.35" />
+
+          {/* Terminals */}
+          <circle cx="320" cy="600" r="3.5" fill="#22d3ee" opacity="0.8" />
+          <circle cx="1120" cy="600" r="3.5" fill="#818cf8" opacity="0.8" />
+        </svg>
+      </div>
+
+      {/* ========================================================
+          ZONE 05: ENGINEERING LAB & PIPELINE (6000px - 7600px)
+         ======================================================== */}
+      <div className="absolute top-[6000px] left-0 w-full h-[1600px]">
+        {/* Oscilloscope Graticule & Signal Generator Traces */}
+        <svg className="hidden md:block absolute top-10 left-[10%] w-[80%] h-[500px]" viewBox="0 0 1000 500" fill="none">
+          <GlowFilters />
+          
+          {/* Scope Graticule Axis */}
+          <line x1="50" y1="250" x2="950" y2="250" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="2 4" opacity="0.3" />
+          <line x1="500" y1="50" x2="500" y2="450" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="2 4" opacity="0.3" />
+
+          {/* Analog Sine Wave (SENSE) transitioning to Digital Square Wave (DECIDE) */}
+          <path 
+            d="M 60,250 Q 90,190 120,250 T 180,250 T 240,250 T 300,250 L 360,250 L 360,180 L 420,180 L 420,320 L 480,320 L 480,180 L 540,180 L 540,250 L 920,250" 
+            stroke="url(#trace-cyan-grad)" 
+            strokeWidth="1.5" 
+            opacity="0.4" 
+          />
+          <text x="60" y="170" fill="#22d3ee" className="text-[9px] font-mono tracking-widest" opacity="0.6">ANALOG_INPUT ──→ DSP_QUANTIZATION ──→ PWM_ACTUATOR</text>
+        </svg>
+
+        {/* Left Peripheral Step Feeder Bus */}
+        <svg className="absolute top-[400px] left-0 w-[300px] h-[600px]" viewBox="0 0 300 600" fill="none">
+          <path d="M 0,150 L 140,150 L 190,200 L 190,500" stroke="#22d3ee" strokeWidth="1.2" opacity="0.5" />
+          <circle cx="190" cy="500" r="3.5" fill="#22d3ee" opacity="0.8" />
+          <text x="90" y="140" fill="#22d3ee" className="text-[8px] font-mono tracking-widest" opacity="0.7">LAB_PIPELINE_CH1</text>
+        </svg>
+      </div>
+
+      {/* ========================================================
+          ZONE 06: JOURNEY & BEYOND BUILDING (7400px - 9400px)
+         ======================================================== */}
+      <div className="absolute top-[7400px] left-0 w-full h-[2000px]">
+        {/* Milestone Progression Bus on Left Margin */}
+        <svg className="absolute top-10 left-0 w-[350px] h-[1400px]" viewBox="0 0 350 1400" fill="none">
+          <GlowFilters />
+          <path d="M 0,100 L 160,100 L 220,160 L 220,1200 L 160,1260 L 0,1260" stroke="url(#bus-copper-grad)" strokeWidth="1.5" />
+          
+          {/* Milestone Tap Loops */}
+          {[250, 500, 750, 1000].map((y, idx) => (
+            <g key={y}>
+              <path d={`M 220,${y} L 280,${y} L 310,${y + 30}`} stroke="#38bdf8" strokeWidth="1" opacity="0.5" />
+              <circle cx="310" cy={y + 30} r="3" fill="#22d3ee" opacity="0.8" />
+              <text x="235" y={y - 8} fill="#38bdf8" className="text-[8px] font-mono tracking-widest" opacity="0.65">STAGE_0{idx + 1}_LOG</text>
             </g>
-            <text x="165" y="390" fill="currentColor" className="text-[9px] font-mono tracking-widest opacity-80">DATA BUS</text>
-            {!prefersReducedMotion && (
-              <motion.circle r="2.5" fill="#06b6d4" filter="url(#trace-glow)"
-                animate={{ cx: [0, 90, 140, 140, 140], cy: [115, 115, 165, 400, 400], opacity: [0, 1, 1, 1, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
-              />
-            )}
-         </svg>
+          ))}
+        </svg>
+
+        {/* Right Side: Cassette Archive Schematic Grid */}
+        <svg className="hidden md:block absolute top-[600px] right-0 w-[320px] h-[900px]" viewBox="0 0 320 900" fill="none">
+          <path d="M 320,100 L 180,100 L 130,150 L 130,700 L 80,750 L 0,750" stroke="#818cf8" strokeWidth="1.2" opacity="0.45" />
+          <circle cx="80" cy="750" r="3.5" fill="#818cf8" opacity="0.8" />
+          <text x="145" y="140" fill="#818cf8" className="text-[8px] font-mono tracking-widest" opacity="0.65">EVIDENCE_ARCHIVE</text>
+        </svg>
       </div>
 
-      {/* ANCHOR 03: SENSE -> DECIDE ARCHITECTURE (top: 35%) */}
-      <div className="absolute top-[35%] left-0 w-full h-[2000px] opacity-30">
-         {/* SENSE Motif */}
-         <svg className="absolute top-0 left-0 w-[400px] h-[500px]" viewBox="0 0 400 500">
-           <g stroke="currentColor" fill="none" className="text-cyan-accent">
-             <path d="M -50,400 A 200 200 0 0 1 150,200" strokeDasharray="2 6" strokeWidth="2" className="opacity-50" />
-             <path d="M -50,450 A 250 250 0 0 1 200,200" strokeDasharray="4 8" className="opacity-30" />
-             <circle cx="150" cy="200" r="4" fill="currentColor" />
-             <path d="M 150,200 L 250,200 L 300,250 L 300,500" />
-           </g>
-           <text x="160" y="190" fill="currentColor" className="text-[9px] font-mono tracking-widest text-cyan-accent opacity-90">SENSOR INPUT</text>
-         </svg>
+      {/* ========================================================
+          ZONE 07: CURRENTLY BUILDING, CONTACT & FOOTER (9200px - END)
+         ======================================================== */}
+      <div className="absolute top-[9200px] left-0 w-full h-[2200px]">
+        {/* Live Status Telemetry Matrix */}
+        <svg className="absolute top-20 left-0 w-full h-[600px]" viewBox="0 0 1440 600" fill="none" preserveAspectRatio="none">
+          <GlowFilters />
+          
+          {/* Horizontal Diagnostic Conduit */}
+          <path d="M 0,200 L 450,200 L 500,250 L 940,250 L 990,200 L 1440,200" stroke="url(#trace-cyan-grad)" strokeWidth="1.5" opacity="0.5" />
+          <path d="M 0,215 L 440,215 L 490,265 L 950,265 L 1000,215 L 1440,215" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="6 3" opacity="0.35" />
 
-         {/* COMPUTE Motif */}
-         <svg className="hidden md:block absolute top-[40%] right-0 w-[300px] h-[300px]" viewBox="0 0 300 300">
-           <g stroke="currentColor" fill="none" className="text-electric-blue">
-             <rect x="100" y="100" width="120" height="120" strokeWidth="1.5" className="opacity-40" />
-             <rect x="110" y="110" width="100" height="100" strokeDasharray="2 4" className="opacity-60" />
-             <path d="M 0,160 L 100,160" />
-             <circle cx="0" cy="160" r="3" fill="currentColor" />
-           </g>
-           <text x="10" y="150" fill="currentColor" className="text-[9px] font-mono tracking-widest text-electric-blue opacity-90">PROCESSING</text>
-         </svg>
-      </div>
+          {/* Central Diagnostic Hub Indicator */}
+          <circle cx="720" cy="250" r="6" fill="#22d3ee" opacity="0.85" filter="url(#env-trace-glow)" />
+          <circle cx="720" cy="250" r="2" fill="#060e22" />
+          <text x="735" y="244" fill="#22d3ee" className="text-[9px] font-mono tracking-widest" opacity="0.8">LIVE_TELEMETRY_ENGINE</text>
 
-      {/* ANCHOR 04: JOURNEY ARCHITECTURE (top: 60%) */}
-      <div className="absolute top-[60%] left-0 w-full h-[1500px] opacity-25">
-         <svg className="absolute top-[10%] left-0 w-[300px] h-[1000px]" viewBox="0 0 300 1000">
-           <g stroke="currentColor" fill="none" strokeLinecap="square">
-             <path d="M 0,200 L 200,200 L 250,250 L 250,800" className="text-violet-accent opacity-50" />
-             <circle cx="250" cy="800" r="3" fill="currentColor" className="text-violet-accent" />
-           </g>
-         </svg>
-         
-         <svg className="absolute top-[30%] right-0 w-[300px] h-[1000px]" viewBox="0 0 300 1000">
-           <g stroke="currentColor" fill="none" strokeLinecap="square">
-             <path d="M 300,100 L 100,100 L 50,150 L 50,800" className="text-electric-blue opacity-40" />
-             <circle cx="50" cy="800" r="3" fill="currentColor" className="text-electric-blue" />
-           </g>
-         </svg>
-      </div>
+          {!prefersReducedMotion && (
+            <motion.circle 
+              r="3.5" 
+              fill="#22d3ee" 
+              filter="url(#env-trace-glow)"
+              animate={{
+                cx: [0, 450, 500, 940, 990, 1440],
+                cy: [200, 200, 250, 250, 200, 200],
+                opacity: [0, 1, 1, 1, 1, 0]
+              }}
+              transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+            />
+          )}
+        </svg>
 
-      {/* ANCHOR 05: CURRENTLY BUILDING / CONTACT (bottom: 0) */}
-      <div className="absolute bottom-0 left-0 w-full h-[1000px] opacity-[0.3]">
-         {/* Framing Brackets */}
-         <svg className="absolute bottom-0 left-0 w-[200px] h-[200px]" viewBox="0 0 200 200">
-            <path d="M 50,150 L 50,50 M 50,150 L 150,150" stroke="currentColor" fill="none" strokeWidth="2" className="opacity-40" />
-            <text x="60" y="140" fill="currentColor" className="text-[9px] font-mono tracking-widest opacity-90">SYSTEM ONLINE</text>
-         </svg>
-         
-         <svg className="absolute bottom-0 right-0 w-[200px] h-[200px]" viewBox="0 0 200 200">
-            <path d="M 150,150 L 150,50 M 150,150 L 50,150" stroke="currentColor" fill="none" strokeWidth="2" className="opacity-40" />
-            <text x="60" y="140" fill="currentColor" className="text-[9px] font-mono tracking-widest opacity-90 text-right w-[90px]">RX/TX ACTIVE</text>
-         </svg>
-
-         {/* Status Lines */}
-         <svg className="absolute bottom-[200px] left-0 w-[500px] h-[200px]" viewBox="0 0 500 200">
-            <GlowFilter />
-            <path d="M 0,100 L 300,100 L 350,150" stroke="currentColor" fill="none" strokeDasharray="5 10" className="text-cyan-accent opacity-60" />
-            <circle cx="350" cy="150" r="4" fill="rgba(6,182,212,0.3)" />
-            <circle cx="350" cy="150" r="1.5" fill="currentColor" className="text-cyan-accent" />
-            <text x="360" y="153" fill="currentColor" className="text-[10px] font-mono tracking-widest text-cyan-accent opacity-90">NODE 04</text>
-
-            {!prefersReducedMotion && (
-              <motion.circle r="2.5" fill="#06b6d4" filter="url(#trace-glow)"
-                animate={{ cx: [0, 300, 350, 350], cy: [100, 100, 150, 150], opacity: [0, 1, 1, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-              />
-            )}
-         </svg>
+        {/* Grounding & Signal Termination at the very bottom */}
+        <svg className="absolute bottom-10 left-0 w-full h-[300px]" viewBox="0 0 1440 300" fill="none">
+          {/* Star Ground Symbol and Silkscreen */}
+          <g transform="translate(720, 180)" stroke="#38bdf8" opacity="0.5" strokeWidth="1.2">
+            <line x1="-30" y1="0" x2="30" y2="0" />
+            <line x1="-20" y1="8" x2="20" y2="8" />
+            <line x1="-10" y1="16" x2="10" y2="16" />
+            <line x1="0" y1="-30" x2="0" y2="0" />
+          </g>
+          <text x="720" y="220" textAnchor="middle" fill="#38bdf8" className="text-[8px] font-mono tracking-widest" opacity="0.6">
+            {"SYSTEM_GROUND // EARTH_REF // END_OF_BUS"}
+          </text>
+        </svg>
       </div>
     </div>
   );
 }
+

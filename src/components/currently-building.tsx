@@ -68,11 +68,11 @@ export function CurrentlyBuilding() {
         />
 
         {/* Engineering Status Board */}
-        <div className="mt-16 border border-navy-700 bg-navy-900/30 p-6 md:p-12 relative overflow-hidden rounded-sm shadow-2xl">
+        <div className="mt-16 border border-cyan-500/30 bg-navy-900/80 p-6 md:p-12 relative overflow-hidden rounded-sm shadow-[0_8px_30px_rgba(6,14,34,0.7)] backdrop-blur-md">
           {/* Status Header */}
-          <div className="flex flex-wrap items-center gap-4 text-[10px] font-mono tracking-widest text-gray-500 uppercase border-b border-navy-700/50 pb-6 mb-12">
-            <span className="text-electric-blue flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-electric-blue animate-pulse" />
+          <div className="flex flex-wrap items-center gap-4 text-[10px] font-mono tracking-widest text-gray-400 uppercase border-b border-cyan-500/20 pb-6 mb-12">
+            <span className="text-cyan-300 flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]" />
               SYS.STATUS / ACTIVE
             </span>
             <span className="hidden sm:inline-block">/</span>
@@ -86,9 +86,9 @@ export function CurrentlyBuilding() {
           {/* Central Engineering Identity */}
           <div className="text-center mb-16 relative z-10">
             <h3 className="text-base md:text-xl lg:text-2xl font-mono text-white tracking-widest mb-4">
-              ECE <span className="text-electric-blue/50 mx-1 md:mx-3">×</span> SOFTWARE <span className="text-electric-blue/50 mx-1 md:mx-3">×</span> AI <span className="text-electric-blue/50 mx-1 md:mx-3">×</span> ROBOTICS
+              ECE <span className="text-cyan-400/50 mx-1 md:mx-3">×</span> SOFTWARE <span className="text-cyan-400/50 mx-1 md:mx-3">×</span> AI <span className="text-cyan-400/50 mx-1 md:mx-3">×</span> ROBOTICS
             </h3>
-            <p className="text-gray-400 text-sm md:text-base font-light tracking-wide">
+            <p className="text-gray-300 text-sm md:text-base font-light tracking-wide">
               Building toward multidisciplinary systems.
             </p>
           </div>
@@ -102,16 +102,16 @@ export function CurrentlyBuilding() {
                   <div className={cn(
                     "px-4 py-2 border text-[10px] font-mono tracking-widest transition-all duration-500 rounded-sm", 
                     hoveredMotif === motif 
-                      ? "border-electric-blue bg-electric-blue/10 text-white shadow-[0_0_15px_rgba(34,211,238,0.2)]" 
-                      : "border-navy-700 bg-navy-800/30 text-gray-500"
+                      ? "border-cyan-400 bg-cyan-500/20 text-white shadow-[0_0_15px_rgba(34,211,238,0.4)]" 
+                      : "border-cyan-500/20 bg-navy-900/60 text-gray-400"
                   )}>
                     {motif}
                   </div>
                   {index < systemPath.length - 1 && (
-                    <div className="w-12 h-px bg-navy-700 relative overflow-hidden">
+                    <div className="w-12 h-px bg-cyan-500/30 relative overflow-hidden">
                       {!prefersReducedMotion && (
                         <motion.div 
-                          className="absolute top-0 left-0 h-full w-4 bg-electric-blue/50"
+                          className="absolute top-0 left-0 h-full w-4 bg-cyan-400/60"
                           animate={{ x: ["-400%", "400%"] }}
                           transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: index * 0.5 }}
                         />
@@ -130,10 +130,10 @@ export function CurrentlyBuilding() {
                   onMouseEnter={() => setHoveredMotif(dir.motif)}
                   onMouseLeave={() => setHoveredMotif(null)}
                   className={cn(
-                    "group p-8 border transition-colors duration-500 rounded-sm relative overflow-hidden",
+                    "group p-8 border transition-colors duration-500 rounded-sm relative overflow-hidden backdrop-blur-sm",
                     hoveredMotif === dir.motif 
-                      ? "border-electric-blue/50 bg-navy-800/50" 
-                      : "border-navy-700 bg-navy-900/40 hover:bg-navy-800/40",
+                      ? "border-cyan-400/70 bg-navy-800/90 shadow-[0_0_20px_rgba(34,211,238,0.15)]" 
+                      : "border-cyan-500/20 bg-navy-900/60 hover:bg-navy-800/70 hover:border-cyan-400/40",
                     hoveredMotif && hoveredMotif !== dir.motif && "opacity-50 blur-[1px]"
                   )}
                   tabIndex={0}
@@ -141,28 +141,28 @@ export function CurrentlyBuilding() {
                   onBlur={() => setHoveredMotif(null)}
                 >
                   <div className="flex justify-between items-start mb-6 relative z-10">
-                    <h4 className="text-xl font-medium text-white group-hover:text-electric-blue transition-colors duration-300">
+                    <h4 className="text-xl font-medium text-white group-hover:text-cyan-300 transition-colors duration-300">
                       {dir.label}
                     </h4>
-                    <span className="text-[10px] font-mono tracking-widest text-cyan-accent border border-cyan-accent/30 px-3 py-1 rounded-sm bg-cyan-accent/5">
+                    <span className="text-[10px] font-mono tracking-widest text-cyan-300 border border-cyan-400/40 px-3 py-1 rounded-sm bg-cyan-500/10">
                       {dir.status}
                     </span>
                   </div>
                   
-                  <p className="text-sm text-gray-400 font-light leading-relaxed mb-8 relative z-10 min-h-[60px]">
+                  <p className="text-sm text-gray-300 font-light leading-relaxed mb-8 relative z-10 min-h-[60px]">
                     {dir.description}
                   </p>
 
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {dir.tags.map(tag => (
-                      <span key={tag} className="px-2 py-1 text-[9px] font-mono border border-navy-700 bg-navy-950/50 text-gray-500 rounded-sm">
+                      <span key={tag} className="px-2 py-1 text-[9px] font-mono border border-cyan-500/20 bg-navy-950/80 text-gray-400 rounded-sm">
                         {tag}
                       </span>
                     ))}
                   </div>
 
                   {/* Subtle Motif Tag */}
-                  <div className="absolute right-[-10px] bottom-[-10px] text-[60px] font-mono font-bold text-navy-800/30 group-hover:text-electric-blue/5 transition-colors duration-500 select-none pointer-events-none">
+                  <div className="absolute right-[-10px] bottom-[-10px] text-[60px] font-mono font-bold text-navy-800/40 group-hover:text-cyan-400/10 transition-colors duration-500 select-none pointer-events-none">
                     {dir.motif}
                   </div>
                 </div>
@@ -274,18 +274,18 @@ export function CurrentlyBuilding() {
         </div>
 
         {/* Transition to Contact */}
-        <div className="mt-24 flex items-center justify-center gap-4 text-[10px] font-mono tracking-widest text-gray-500 uppercase">
+        <div className="mt-24 flex items-center justify-center gap-4 text-[10px] font-mono tracking-widest text-gray-400 uppercase">
           <span>ACTIVE DEVELOPMENT</span>
-          <div className="w-12 md:w-32 h-px bg-navy-600 relative overflow-hidden">
+          <div className="w-12 md:w-32 h-px bg-cyan-500/30 relative overflow-hidden">
              {!prefersReducedMotion && (
                <motion.div 
-                 className="absolute top-0 left-0 w-8 h-full bg-electric-blue/50"
+                 className="absolute top-0 left-0 w-8 h-full bg-cyan-400/60"
                  animate={{ x: ["-100%", "400%"] }}
                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                />
              )}
           </div>
-          <span className="text-electric-blue/70">NEXT SYSTEM</span>
+          <span className="text-cyan-300">NEXT SYSTEM</span>
         </div>
       </div>
     </section>

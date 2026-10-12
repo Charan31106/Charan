@@ -73,10 +73,10 @@ export function EngineeringDNA() {
   };
 
   return (
-    <section id="dna" className="py-24 relative bg-transparent border-y border-navy-800 overflow-hidden">
+    <section id="dna" className="py-24 relative bg-transparent border-y border-cyan-500/20 overflow-hidden">
       {/* Background blueprint grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-navy-950)_80%)] opacity-90 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(6,14,34,0.7)_80%)] pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -85,9 +85,9 @@ export function EngineeringDNA() {
             title="Engineering DNA" 
             subtitle="I work across the stack — from physical sensing to intelligent decision-making."
           />
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 border border-navy-700 bg-navy-800/50 rounded-sm">
-            <div className="w-1.5 h-1.5 bg-electric-blue rounded-full animate-pulse motion-reduce:animate-none" />
-            <span className="text-[10px] font-mono text-gray-400 tracking-widest uppercase">Live Architecture</span>
+          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 border border-cyan-500/20 bg-navy-900/60 rounded-sm backdrop-blur-sm">
+            <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse motion-reduce:animate-none" />
+            <span className="text-[10px] font-mono text-cyan-300/80 tracking-widest uppercase">Live Architecture</span>
           </div>
         </div>
 
@@ -96,8 +96,8 @@ export function EngineeringDNA() {
           
           {/* ENGINEERING CORE */}
           <div className="flex flex-col items-center">
-            <div className="px-8 py-3 border border-electric-blue/40 bg-electric-blue/10 text-electric-blue font-mono text-sm tracking-widest rounded-sm shadow-[0_0_20px_rgba(59,130,246,0.15)] flex items-center gap-3">
-              <div className="w-2 h-2 bg-electric-blue rounded-full" />
+            <div className="px-8 py-3 border border-cyan-400/50 bg-cyan-500/10 text-cyan-300 font-mono text-sm tracking-widest rounded-sm shadow-[0_0_25px_rgba(34,211,238,0.25)] flex items-center gap-3 backdrop-blur-md">
+              <div className="w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_8px_#22d3ee]" />
               ENGINEERING CORE
             </div>
             <div className="w-px h-8 bg-navy-600 hidden lg:block relative overflow-hidden">
@@ -128,8 +128,8 @@ export function EngineeringDNA() {
                   {/* Domain Card */}
                   <div 
                     className={cn(
-                      "relative flex flex-col p-6 border rounded-sm transition-all duration-500 h-full",
-                      isDomainFocused ? "border-electric-blue/50 bg-navy-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.2)]" : "border-navy-700/60 bg-navy-900/40",
+                      "relative flex flex-col p-6 border rounded-sm transition-all duration-500 h-full backdrop-blur-md",
+                      isDomainFocused ? "border-cyan-400/60 bg-navy-800/90 shadow-[0_4px_25px_rgba(6,14,34,0.6)]" : "border-cyan-500/20 bg-navy-900/60",
                       isDomainDimmed ? "opacity-30 blur-[0.5px]" : "opacity-100"
                     )}
                     onMouseEnter={() => setHoveredDomain(domain.id)}
@@ -138,16 +138,16 @@ export function EngineeringDNA() {
                     <div className="mb-6 flex flex-col items-start">
                       <h3 className={cn(
                         "text-sm font-mono tracking-widest transition-colors",
-                        isDomainFocused ? "text-electric-blue" : "text-gray-300"
+                        isDomainFocused ? "text-cyan-300" : "text-gray-200"
                       )}>
                         {domain.title}
                       </h3>
-                      <p className="text-[10px] text-gray-500 font-mono uppercase tracking-wider mt-1">{domain.layer}</p>
+                      <p className="text-[10px] text-gray-400 font-mono uppercase tracking-wider mt-1">{domain.layer}</p>
                       
                       {/* Motif Tag */}
-                      <div className="flex items-center gap-2 mt-4 px-2 py-1 bg-navy-950 border border-navy-700 rounded-sm">
-                        <div className="w-1 h-1 bg-cyan-accent rounded-full" />
-                        <span className="text-[9px] text-cyan-accent/80 font-mono">{domain.motif}</span>
+                      <div className="flex items-center gap-2 mt-4 px-2 py-1 bg-navy-950/80 border border-cyan-500/30 rounded-sm">
+                        <div className="w-1 h-1 bg-cyan-accent rounded-full shadow-[0_0_6px_#22d3ee]" />
+                        <span className="text-[9px] text-cyan-300 font-mono">{domain.motif}</span>
                       </div>
                     </div>
 
@@ -162,9 +162,9 @@ export function EngineeringDNA() {
                             key={skill}
                             className={cn(
                               "px-3 py-2 text-xs md:text-sm font-mono transition-all duration-300 border rounded-sm cursor-default flex items-center justify-between group",
-                              isActive ? "border-electric-blue/60 bg-electric-blue/10 text-white translate-x-1" : "border-navy-700/40 bg-navy-950/50 text-gray-400",
+                              isActive ? "border-cyan-400/70 bg-cyan-500/15 text-white translate-x-1 shadow-[0_0_12px_rgba(34,211,238,0.2)]" : "border-cyan-500/15 bg-navy-950/70 text-gray-300",
                               isDimmed && !isActive ? "opacity-30" : "opacity-100",
-                              isHoveredExactly ? "border-electric-blue bg-electric-blue/20 shadow-[0_0_10px_rgba(59,130,246,0.2)]" : ""
+                              isHoveredExactly ? "border-cyan-400 bg-cyan-500/25 shadow-[0_0_15px_rgba(34,211,238,0.3)]" : ""
                             )}
                             onMouseEnter={() => setHoveredSkill(skill)}
                             onMouseLeave={() => setHoveredSkill(null)}
@@ -172,7 +172,7 @@ export function EngineeringDNA() {
                             <span>{skill}</span>
                             <div className={cn(
                               "w-1.5 h-1.5 rounded-full transition-colors",
-                              isActive ? "bg-electric-blue" : "bg-navy-700"
+                              isActive ? "bg-cyan-400 shadow-[0_0_6px_#22d3ee]" : "bg-navy-700"
                             )} />
                           </div>
                         );

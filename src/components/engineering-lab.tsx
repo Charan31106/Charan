@@ -60,10 +60,10 @@ export function EngineeringLab() {
           {/* Pipeline Navigation - Horizontal on Desktop */}
           <div className="flex flex-col md:flex-row justify-between w-full relative">
             {/* Connecting Line for Desktop */}
-            <div className="absolute top-6 left-10 right-10 h-px bg-navy-700 hidden md:block z-0" />
+            <div className="absolute top-6 left-10 right-10 h-px bg-cyan-500/30 hidden md:block z-0" />
             
             {/* Connecting Line for Mobile */}
-            <div className="absolute left-6 top-10 bottom-10 w-px bg-navy-700 md:hidden z-0" />
+            <div className="absolute left-6 top-10 bottom-10 w-px bg-cyan-500/30 md:hidden z-0" />
 
             {pipeline.map((item, index) => {
               const isActive = activeStep === index;
@@ -76,15 +76,15 @@ export function EngineeringLab() {
                   <div className={cn(
                     "w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 shrink-0 mx-auto",
                     isActive 
-                      ? "bg-electric-blue/10 border-electric-blue text-electric-blue shadow-[0_0_20px_rgba(59,130,246,0.3)] scale-110" 
-                      : "bg-navy-900 border-navy-600 text-gray-500 group-hover:border-gray-400 group-hover:text-gray-300 bg-navy-900"
+                      ? "bg-cyan-500/15 border-cyan-400 text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.35)] scale-110" 
+                      : "bg-navy-900/80 border-cyan-500/20 text-gray-400 group-hover:border-cyan-400/50 group-hover:text-gray-200"
                   )}>
                     <span className="font-mono text-sm">{item.step}</span>
                   </div>
                   <div>
                     <h3 className={cn(
                       "tracking-widest text-sm transition-colors duration-300 uppercase",
-                      isActive ? "text-white font-medium" : "text-gray-400 group-hover:text-gray-200"
+                      isActive ? "text-cyan-300 font-medium" : "text-gray-400 group-hover:text-gray-200"
                     )}>
                       {item.name}
                     </h3>
@@ -103,11 +103,14 @@ export function EngineeringLab() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="bg-navy-800/40 border border-navy-700 p-8 md:p-12 rounded-sm w-full"
+                className="bg-navy-900/80 border border-cyan-500/30 p-8 md:p-12 rounded-sm w-full backdrop-blur-md shadow-[0_8px_30px_rgba(6,14,34,0.6)] relative overflow-hidden"
               >
+                {/* Subtle top indicator line */}
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
+
                 <div className="mb-8">
-                  <span className="text-electric-blue font-mono text-sm tracking-widest mb-2 block">
-                    PHASE {pipeline[activeStep].step}
+                  <span className="text-cyan-accent font-mono text-sm tracking-widest mb-2 block">
+                    {`PHASE ${pipeline[activeStep].step} // TEST_BENCH_ACTIVE`}
                   </span>
                   <h2 className="text-3xl md:text-4xl text-white font-light mb-4">
                     {pipeline[activeStep].name}
@@ -119,22 +122,22 @@ export function EngineeringLab() {
                 
                 <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
                   <div>
-                    <h4 className="text-xs font-mono tracking-widest text-gray-500 mb-4 border-b border-navy-700 pb-2">TECHNOLOGIES</h4>
+                    <h4 className="text-xs font-mono tracking-widest text-cyan-400/70 mb-4 border-b border-cyan-500/20 pb-2">TECHNOLOGIES</h4>
                     <ul className="space-y-3">
                       {pipeline[activeStep].tech.map(tech => (
-                        <li key={tech} className="text-gray-300 font-light flex items-center gap-3 text-sm md:text-base">
-                          <div className="w-1.5 h-1.5 bg-electric-blue rounded-full" />
+                        <li key={tech} className="text-gray-200 font-light flex items-center gap-3 text-sm md:text-base">
+                          <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full shadow-[0_0_6px_#22d3ee]" />
                           {tech}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-xs font-mono tracking-widest text-gray-500 mb-4 border-b border-navy-700 pb-2">IMPLEMENTATIONS</h4>
+                    <h4 className="text-xs font-mono tracking-widest text-cyan-400/70 mb-4 border-b border-cyan-500/20 pb-2">IMPLEMENTATIONS</h4>
                     <ul className="space-y-3">
                       {pipeline[activeStep].projects.map(project => (
-                        <li key={project} className="text-gray-300 font-light flex items-center gap-3 text-sm md:text-base">
-                          <div className="w-1.5 h-1.5 bg-violet-accent rounded-full" />
+                        <li key={project} className="text-gray-200 font-light flex items-center gap-3 text-sm md:text-base">
+                          <div className="w-1.5 h-1.5 bg-violet-accent rounded-full shadow-[0_0_6px_#a78bfa]" />
                           {project}
                         </li>
                       ))}

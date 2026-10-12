@@ -8,8 +8,8 @@ import { HeroSystemVisualization } from "./hero-visual";
 export function Hero() {
   return (
     <section className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden pt-24 pb-12">
-      {/* Abstract Grid Background */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#0B1018_1px,transparent_1px),linear-gradient(to_bottom,#0B1018_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
+      {/* Abstract Blueprint Grid Background */}
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,rgba(56,189,248,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(56,189,248,0.06)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 w-full relative z-10 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         {/* Left: Introduction (approx 45%) */}
@@ -78,9 +78,9 @@ export function Hero() {
 
 function FocusModule({ label }: { label: string }) {
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 bg-navy-900/40 border border-navy-700/50 rounded-sm">
-      <div className="w-1 h-1 bg-gray-500 rounded-full" />
-      <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">{label}</span>
+    <div className="flex items-center gap-2 px-3 py-1.5 bg-navy-900/60 border border-cyan-500/20 hover:border-cyan-400/40 rounded-sm transition-colors">
+      <div className="w-1.5 h-1.5 bg-cyan-400/80 rounded-full" />
+      <span className="text-[10px] font-mono text-gray-300 uppercase tracking-widest">{label}</span>
     </div>
   );
 }

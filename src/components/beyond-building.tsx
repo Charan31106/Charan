@@ -64,8 +64,8 @@ export function BeyondBuilding() {
               className={cn(
                 "px-4 py-2 text-[10px] md:text-xs font-mono tracking-widest rounded-sm transition-all duration-300 border",
                 activeFilter === filter.id 
-                  ? "border-electric-blue bg-electric-blue/10 text-white" 
-                  : "border-navy-700 bg-navy-900/50 text-gray-400 hover:text-gray-200 hover:border-navy-500"
+                  ? "border-cyan-400 bg-cyan-500/15 text-white shadow-[0_0_12px_rgba(34,211,238,0.2)]" 
+                  : "border-cyan-500/20 bg-navy-900/60 text-gray-400 hover:text-gray-200 hover:border-cyan-400/50"
               )}
             >
               {filter.label}
@@ -90,30 +90,30 @@ export function BeyondBuilding() {
                   key={item.id}
                   onClick={() => setSelectedItem(item)}
                   className={cn(
-                    "group relative flex flex-col p-6 border border-navy-700 bg-navy-900/30 hover:bg-navy-800/50 transition-colors duration-500 cursor-pointer overflow-hidden rounded-sm",
+                    "group relative flex flex-col p-6 border border-cyan-500/20 bg-navy-900/70 hover:bg-navy-800/80 hover:border-cyan-400/60 transition-colors duration-500 cursor-pointer overflow-hidden rounded-sm backdrop-blur-md hover:shadow-[0_8px_30px_rgba(6,14,34,0.7)]",
                     isLarge ? "md:col-span-2 lg:col-span-2" : "col-span-1"
                   )}
                 >
                   <div className="flex justify-between items-start mb-10 relative z-10">
-                    <span className="text-[10px] font-mono tracking-widest text-gray-500 uppercase">
+                    <span className="text-[10px] font-mono tracking-widest text-cyan-400/70 uppercase">
                       {String(index + 1).padStart(2, '0')} / {item.category}
                     </span>
                     {item.year && (
-                      <span className="text-[9px] font-mono tracking-widest text-cyan-accent/80 border border-cyan-accent/30 px-2 py-0.5 rounded-sm">
+                      <span className="text-[9px] font-mono tracking-widest text-cyan-300 border border-cyan-400/40 px-2 py-0.5 rounded-sm bg-cyan-500/10">
                         {item.year}
                       </span>
                     )}
                   </div>
                   
                   <div className="relative z-10 mb-6">
-                    <h3 className="text-lg lg:text-xl font-medium text-white mb-2 group-hover:text-electric-blue transition-colors group-hover:translate-x-1 duration-300">
+                    <h3 className="text-lg lg:text-xl font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors group-hover:translate-x-1 duration-300">
                       {item.title}
                     </h3>
-                    <p className="text-[10px] font-mono text-gray-400 uppercase tracking-widest border-l-2 border-electric-blue/50 pl-2">
+                    <p className="text-[10px] font-mono text-gray-300 uppercase tracking-widest border-l-2 border-cyan-400/60 pl-2">
                       {item.type}
                     </p>
                     {item.subtitle && (
-                      <p className="text-xs font-mono text-electric-blue/80 mt-2">{item.subtitle}</p>
+                      <p className="text-xs font-mono text-cyan-300/80 mt-2">{item.subtitle}</p>
                     )}
                     {item.description && (
                       <p className="text-sm text-gray-400 font-light mt-4 line-clamp-2">
@@ -123,27 +123,27 @@ export function BeyondBuilding() {
                   </div>
 
                   {/* Asset Slot / Placeholder */}
-                  <div className="w-full h-32 md:h-40 border border-navy-600/50 bg-[#020406] flex items-center justify-center relative overflow-hidden group-hover:border-electric-blue/40 transition-colors mt-auto">
+                  <div className="w-full h-32 md:h-40 border border-cyan-500/20 bg-navy-950/90 flex items-center justify-center relative overflow-hidden group-hover:border-cyan-400/50 transition-colors mt-auto">
                     {/* Subtle motif based on category */}
                     {item.category === 'hardware' && (
                       <>
                         <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:16px_16px]" />
-                        <div className="absolute w-full h-px bg-electric-blue/10 top-1/2 -translate-y-1/2 group-hover:bg-electric-blue/30 transition-colors" />
+                        <div className="absolute w-full h-px bg-cyan-400/20 top-1/2 -translate-y-1/2 group-hover:bg-cyan-400/40 transition-colors" />
                       </>
                     )}
                     {item.category === 'hackathon' && (
-                      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_rgba(139,92,246,0.3)_0%,_transparent_70%)] group-hover:opacity-30 transition-opacity" />
+                      <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_center,_rgba(139,92,246,0.3)_0%,_transparent_70%)] group-hover:opacity-35 transition-opacity" />
                     )}
 
                     <div className="flex flex-col items-center gap-2 relative z-10">
-                      <span className="text-[10px] font-mono tracking-widest text-gray-500 group-hover:text-electric-blue/80 transition-colors text-center px-4">
+                      <span className="text-[10px] font-mono tracking-widest text-cyan-400/70 group-hover:text-cyan-300 transition-colors text-center px-4">
                         {item.status === 'asset-pending' ? 'DOCUMENTATION ASSET PENDING' : 'VIEW DOCUMENTATION →'}
                       </span>
                     </div>
                   </div>
 
                   {/* Hover Trace */}
-                  <div className="absolute top-0 left-0 w-full h-px bg-electric-blue/0 group-hover:bg-electric-blue/50 transition-colors duration-500" />
+                  <div className="absolute top-0 left-0 w-full h-px bg-cyan-400/0 group-hover:bg-cyan-400/70 transition-colors duration-500" />
                 </motion.div>
               );
             })}
@@ -151,18 +151,18 @@ export function BeyondBuilding() {
         </div>
 
         {/* Transition to Currently Building */}
-        <div className="mt-24 flex items-center justify-center gap-4 text-[10px] font-mono tracking-widest text-gray-500 uppercase">
+        <div className="mt-24 flex items-center justify-center gap-4 text-[10px] font-mono tracking-widest text-gray-400 uppercase">
           <span>ARCHIVE</span>
-          <div className="w-12 md:w-32 h-px bg-navy-600 relative overflow-hidden">
+          <div className="w-12 md:w-32 h-px bg-cyan-500/30 relative overflow-hidden">
              {!prefersReducedMotion && (
                <motion.div 
-                 className="absolute top-0 left-0 w-8 h-full bg-electric-blue/50"
+                 className="absolute top-0 left-0 w-8 h-full bg-cyan-400/60"
                  animate={{ x: ["-100%", "400%"] }}
                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                />
              )}
           </div>
-          <span className="text-electric-blue/70">ACTIVE DEVELOPMENT</span>
+          <span className="text-cyan-300">ACTIVE DEVELOPMENT</span>
         </div>
       </div>
 

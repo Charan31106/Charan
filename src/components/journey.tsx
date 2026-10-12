@@ -30,10 +30,10 @@ export function Journey() {
 
         <div className="relative mt-16 lg:mt-32">
           {/* Desktop Horizontal Line */}
-          <div className="hidden lg:block absolute top-[7px] left-[10%] right-[10%] w-[80%] h-px bg-navy-700 z-0 overflow-hidden">
+          <div className="hidden lg:block absolute top-[7px] left-[10%] right-[10%] w-[80%] h-px bg-cyan-500/30 z-0 overflow-hidden">
             {!prefersReducedMotion && (
               <motion.div 
-                className="absolute top-0 left-0 w-64 h-full bg-gradient-to-r from-transparent via-electric-blue to-transparent opacity-70"
+                className="absolute top-0 left-0 w-64 h-full bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80"
                 animate={{ x: ["-100%", "400%"] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
               />
@@ -58,10 +58,10 @@ export function Journey() {
                 >
                   {/* Mobile Vertical Line */}
                   {!isLast && (
-                    <div className="absolute left-[7px] top-[24px] bottom-[-32px] w-px bg-navy-700 lg:hidden overflow-hidden">
+                    <div className="absolute left-[7px] top-[24px] bottom-[-32px] w-px bg-cyan-500/30 lg:hidden overflow-hidden">
                       {!prefersReducedMotion && (
                         <motion.div 
-                          className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-transparent via-electric-blue/50 to-transparent"
+                          className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-transparent via-cyan-400/60 to-transparent"
                           animate={{ y: ["-100%", "400%"] }}
                           transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: index * 0.5 }}
                         />
@@ -73,7 +73,7 @@ export function Journey() {
                   <div className="flex-none mt-1 lg:mt-0 relative z-10 bg-navy-950 p-1">
                     <div className={cn(
                       "w-3 h-3 rounded-full border-2 transition-all duration-300",
-                      isHovered ? "border-electric-blue bg-electric-blue/20 scale-150 shadow-[0_0_15px_rgba(59,130,246,0.5)]" : "border-navy-500 bg-navy-900"
+                      isHovered ? "border-cyan-400 bg-cyan-500/30 scale-150 shadow-[0_0_15px_rgba(34,211,238,0.7)]" : "border-cyan-500/40 bg-navy-900"
                     )} />
                   </div>
 
@@ -82,13 +82,13 @@ export function Journey() {
                     <div className="flex items-center gap-3 lg:justify-center">
                       <span className={cn(
                         "text-[10px] font-mono px-1.5 py-0.5 rounded-sm transition-colors",
-                        isHovered ? "text-electric-blue bg-electric-blue/10 border border-electric-blue/30" : "text-gray-500 bg-navy-800/50 border border-navy-700"
+                        isHovered ? "text-cyan-300 bg-cyan-500/15 border border-cyan-400/40" : "text-gray-400 bg-navy-900/80 border border-cyan-500/20"
                       )}>
                         {node.number}
                       </span>
                       <h3 className={cn(
                         "text-sm font-mono tracking-widest transition-colors duration-300",
-                        isHovered ? "text-white" : "text-gray-300"
+                        isHovered ? "text-white" : "text-gray-200"
                       )}>
                         {node.title}
                       </h3>
@@ -96,7 +96,7 @@ export function Journey() {
                     
                     <p className={cn(
                       "text-[10px] uppercase font-mono mt-3 lg:mt-4 tracking-widest transition-colors",
-                      isHovered ? "text-cyan-accent" : "text-cyan-accent/50"
+                      isHovered ? "text-cyan-300" : "text-cyan-400/60"
                     )}>
                       {node.domain}
                     </p>
@@ -105,7 +105,7 @@ export function Journey() {
                       {node.subtitle}
                     </p>
                     
-                    <p className="text-sm lg:text-[11px] lg:leading-relaxed text-gray-500 mt-2 font-light max-w-[280px]">
+                    <p className="text-sm lg:text-[11px] lg:leading-relaxed text-gray-400 mt-2 font-light max-w-[280px]">
                       {node.description}
                     </p>
                     
@@ -114,7 +114,7 @@ export function Journey() {
                       {node.tags.map(tag => (
                         <span key={tag} className={cn(
                           "px-2 py-1 text-[10px] lg:text-[9px] font-mono border rounded-sm transition-colors duration-300",
-                          isHovered ? "border-electric-blue/40 text-gray-200 bg-electric-blue/5" : "border-navy-700/60 text-gray-500 bg-navy-900"
+                          isHovered ? "border-cyan-400/50 text-gray-200 bg-cyan-500/10" : "border-cyan-500/20 text-gray-400 bg-navy-900/60"
                         )}>
                           {tag}
                         </span>
@@ -123,9 +123,9 @@ export function Journey() {
 
                     {/* Current Phase Marker for the last stage */}
                     {isLast && (
-                      <div className="mt-8 flex items-center gap-2 border border-violet-accent/30 bg-violet-accent/5 px-3 py-1.5 rounded-sm">
+                      <div className="mt-8 flex items-center gap-2 border border-violet-accent/40 bg-violet-accent/10 px-3 py-1.5 rounded-sm shadow-[0_0_15px_rgba(167,139,250,0.2)]">
                         <div className="w-1.5 h-1.5 bg-violet-accent rounded-full animate-pulse motion-reduce:animate-none" />
-                        <span className="text-[10px] text-violet-accent font-mono tracking-widest uppercase">CURRENT PHASE</span>
+                        <span className="text-[10px] text-violet-300 font-mono tracking-widest uppercase">CURRENT PHASE</span>
                       </div>
                     )}
                   </div>
@@ -137,8 +137,8 @@ export function Journey() {
 
         {/* Section Transition to Beyond Building */}
         <div className="mt-24 lg:mt-32 flex flex-col items-center">
-          <div className="w-px h-16 bg-gradient-to-b from-navy-600 to-transparent" />
-          <div className="text-[10px] font-mono tracking-widest text-gray-500 uppercase mt-4">
+          <div className="w-px h-16 bg-gradient-to-b from-cyan-500/40 to-transparent" />
+          <div className="text-[10px] font-mono tracking-widest text-cyan-400/60 uppercase mt-4">
             SYSTEM PROGRESSION ──→ DOCUMENTATION
           </div>
         </div>
