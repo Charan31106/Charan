@@ -1,8 +1,6 @@
 import { Navigation } from "@/components/navigation";
 import { Hero } from "@/components/hero";
-import { EngineeringIdentity } from "@/components/engineering-identity";
 import { SystemsGrid } from "@/components/systems-grid";
-import { EngineeringDNA } from "@/components/engineering-dna";
 import { EngineeringLab } from "@/components/engineering-lab";
 import { Journey } from "@/components/journey";
 import { BeyondBuilding } from "@/components/beyond-building";
@@ -17,9 +15,7 @@ export default function Home() {
       <ECEEngineeringEnvironment />
       <Navigation />
       <Hero />
-      <EngineeringIdentity />
       <SystemsGrid />
-      <EngineeringDNA />
       <EngineeringLab />
       <Journey />
       <BeyondBuilding />

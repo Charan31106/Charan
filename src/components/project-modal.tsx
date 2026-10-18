@@ -1,12 +1,13 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink } from "lucide-react";
+import { X, ExternalLink, Cpu, Network, Workflow, Layers } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { Project } from "@/data/projects";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ProjectVisual } from "./project-visuals";
+import Image from "next/image";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -89,12 +90,98 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Content */}
           <div className="overflow-y-auto flex-1 custom-scrollbar bg-navy-950/60">
-            {/* System Visualization */}
+            {/* System Visualization / Deployed Preview */}
             <div className="relative w-full h-[300px] md:h-[400px] bg-navy-950 border-b border-cyan-500/20 flex items-center justify-center overflow-hidden">
-                <div className="absolute top-4 left-4 z-10 text-[10px] font-mono text-cyan-400/60">
-                    SYSTEM_ARCHITECTURE_VISUAL
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-2.5 py-1 rounded-full bg-navy-950/80 border border-cyan-500/30 backdrop-blur-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                    <span className="text-[10px] font-mono text-cyan-300 uppercase tracking-widest">
+                        {project.image ? "DEPLOYED_SYSTEM_PREVIEW // LIVE_INTERFACE" : "SYSTEM_ARCHITECTURE_VISUAL"}
+                    </span>
                 </div>
-                <ProjectVisual type={project.visualType} variant="modal" className="w-full h-full" />
+
+                {project.image ? (
+                  <div className="relative w-full h-full group">
+                    <Image 
+                      src={project.image} 
+                      alt={project.title}
+                      fill
+                      unoptimized
+                      sizes="(max-width: 1024px) 100vw, 80vw"
+                      className="object-cover object-top opacity-85 hover:opacity-100 transition-opacity duration-500 filter brightness-[0.9] contrast-[1.05]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/50 pointer-events-none" />
+                    
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-3.5 py-2 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/50 hover:border-cyan-300 text-cyan-300 font-mono text-xs rounded-sm transition-all shadow-[0_0_15px_rgba(34,211,238,0.25)] backdrop-blur-sm"
+                      >
+                        <ExternalLink size={13} />
+                        <span>LAUNCH LIVE APP</span>
+                      </a>
+                    )}
+                  </div>
+                ) : (
+                  <ProjectVisual type={project.visualType} variant="modal" className="w-full h-full" />
+                )}
+            </div>
+
+            {/* Architecture Telemetry & Spec Sheet */}
+            <div className="bg-navy-950/90 border-b border-cyan-500/20 px-6 py-4 md:px-8">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="text-[10px] font-mono tracking-widest text-cyan-400/80 uppercase">
+                    SYSTEM ARCHITECTURE & HARDWARE SPECIFICATIONS
+                  </span>
+                </div>
+                <span className="text-[9px] font-mono text-gray-500 hidden sm:inline">
+                  {`VERIFIED // ${project.year}`}
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="p-3 bg-navy-900/60 border border-cyan-500/20 rounded-sm">
+                  <div className="flex items-center gap-1.5 text-cyan-400/70 text-[9px] font-mono uppercase mb-1">
+                    <Cpu size={12} className="text-cyan-400" />
+                    <span>EXECUTION CORE</span>
+                  </div>
+                  <p className="text-gray-100 font-mono text-xs font-light leading-snug">
+                    {project.specs?.compute || project.technologies[0]}
+                  </p>
+                </div>
+
+                <div className="p-3 bg-navy-900/60 border border-cyan-500/20 rounded-sm">
+                  <div className="flex items-center gap-1.5 text-cyan-400/70 text-[9px] font-mono uppercase mb-1">
+                    <Network size={12} className="text-cyan-400" />
+                    <span>BUS & PROTOCOL</span>
+                  </div>
+                  <p className="text-gray-100 font-mono text-xs font-light leading-snug">
+                    {project.specs?.protocol || "TCP/IP // HTTPS JSON"}
+                  </p>
+                </div>
+
+                <div className="p-3 bg-navy-900/60 border border-cyan-500/20 rounded-sm">
+                  <div className="flex items-center gap-1.5 text-cyan-400/70 text-[9px] font-mono uppercase mb-1">
+                    <Workflow size={12} className="text-cyan-400" />
+                    <span>PIPELINE FLOW</span>
+                  </div>
+                  <p className="text-gray-100 font-mono text-xs font-light leading-snug">
+                    {project.specs?.pipeline || "Ingestion → Computation → Actuation"}
+                  </p>
+                </div>
+
+                <div className="p-3 bg-navy-900/60 border border-cyan-500/20 rounded-sm">
+                  <div className="flex items-center gap-1.5 text-cyan-400/70 text-[9px] font-mono uppercase mb-1">
+                    <Layers size={12} className="text-cyan-400" />
+                    <span>DOMAIN / SCOPE</span>
+                  </div>
+                  <p className="text-gray-100 font-mono text-xs font-light leading-snug">
+                    {project.specs?.domain || project.category.join(" // ")}
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className="p-6 md:p-8">

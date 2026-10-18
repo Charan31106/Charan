@@ -6,6 +6,7 @@ import { SectionHeader } from "./ui/section-header";
 import { evidenceData, EvidenceCategory, EvidenceItem } from "@/data/evidence";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
+import { TiltCard } from "./ui/tilt-card";
 
 const filters: { id: EvidenceCategory | 'all', label: string }[] = [
   { id: 'all', label: 'ALL' },
@@ -50,7 +51,7 @@ export function BeyondBuilding() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <SectionHeader 
-            number="06" 
+            number="04" 
             title="Beyond Building" 
             subtitle="The work behind the systems."
           />
@@ -92,86 +93,86 @@ export function BeyondBuilding() {
                   exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4 }}
                   key={item.id}
-                  onClick={() => setSelectedItem(item)}
-                  className={cn(
-                    "group relative flex flex-col p-6 border border-cyan-500/20 bg-navy-900/70 hover:bg-navy-800/80 hover:border-cyan-400/60 transition-colors duration-500 cursor-pointer overflow-hidden rounded-sm backdrop-blur-md hover:shadow-[0_8px_30px_rgba(6,14,34,0.7)]",
-                    isLarge ? "md:col-span-2 lg:col-span-2" : "col-span-1"
-                  )}
+                  className={cn("w-full h-full flex", isLarge ? "md:col-span-2 lg:col-span-2" : "col-span-1")}
                 >
-                  <div className="flex justify-between items-start mb-10 relative z-10">
-                    <span className="text-[10px] font-mono tracking-widest text-cyan-400/70 uppercase">
-                      {String(index + 1).padStart(2, '0')} / {activeFilter === 'certificate' ? 'CERTIFICATE' : item.category}
-                    </span>
-                    {item.year && (
-                      <span className="text-[9px] font-mono tracking-widest text-cyan-300 border border-cyan-400/40 px-2 py-0.5 rounded-sm bg-cyan-500/10">
-                        {item.year}
+                  <TiltCard
+                    onClick={() => setSelectedItem(item)}
+                    maxTilt={7}
+                    glareOpacity={0.16}
+                    className="group relative flex flex-col p-6 border border-cyan-500/20 bg-navy-900/70 hover:border-cyan-400/60 transition-colors duration-300 cursor-pointer overflow-hidden rounded-sm backdrop-blur-md w-full"
+                  >
+                    <div className="flex justify-between items-start mb-10 relative z-10">
+                      <span className="text-[10px] font-mono tracking-widest text-cyan-400/70 uppercase">
+                        {String(index + 1).padStart(2, '0')} / {activeFilter === 'certificate' ? 'CERTIFICATE' : item.category}
                       </span>
-                    )}
-                  </div>
-                  
-                  <div className="relative z-10 mb-6">
-                    <h3 className="text-lg lg:text-xl font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors group-hover:translate-x-1 duration-300">
-                      {item.title}
-                    </h3>
-                    <p className="text-[10px] font-mono text-gray-300 uppercase tracking-widest border-l-2 border-cyan-400/60 pl-2">
-                      {item.type}
-                    </p>
-                    {item.subtitle && (
-                      <p className="text-xs font-mono text-cyan-300/80 mt-2">{item.subtitle}</p>
-                    )}
-                    {item.description && (
-                      <p className="text-sm text-gray-400 font-light mt-4 line-clamp-2">
-                        {item.description}
+                      {item.year && (
+                        <span className="text-[9px] font-mono tracking-widest text-cyan-300 border border-cyan-400/40 px-2 py-0.5 rounded-sm bg-cyan-500/10">
+                          {item.year}
+                        </span>
+                      )}
+                    </div>
+                    
+                    <div className="relative z-10 mb-6">
+                      <h3 className="text-lg lg:text-xl font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors group-hover:translate-x-1 duration-300">
+                        {item.title}
+                      </h3>
+                      <p className="text-[10px] font-mono text-gray-300 uppercase tracking-widest border-l-2 border-cyan-400/60 pl-2">
+                        {item.type}
                       </p>
-                    )}
-                  </div>
+                      {item.subtitle && (
+                        <p className="text-xs font-mono text-cyan-300/80 mt-2">{item.subtitle}</p>
+                      )}
+                      {item.description && (
+                        <p className="text-sm text-gray-400 font-light mt-4 line-clamp-2">
+                          {item.description}
+                        </p>
+                      )}
+                    </div>
 
-                  {/* Asset Slot / Thumbnail Preview */}
-                  <div className="w-full h-36 md:h-44 border border-cyan-500/20 bg-navy-950/90 flex items-center justify-center relative overflow-hidden group-hover:border-cyan-400/50 transition-colors mt-auto rounded-[2px]">
-                    {item.image ? (
-                      <>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img 
-                          src={item.image} 
-                          alt={item.title} 
-                          className="w-full h-full object-cover object-center opacity-70 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500" 
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent pointer-events-none" />
-                        
-                        <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[9px] font-mono tracking-widest pointer-events-none">
-                          <span className="text-cyan-300 font-semibold flex items-center gap-1.5 bg-navy-950/90 px-2 py-0.5 rounded border border-cyan-500/30 backdrop-blur-sm">
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                            VERIFIED CREDENTIAL
-                          </span>
-                          <span className="text-gray-300 group-hover:text-cyan-300 transition-colors bg-navy-950/90 px-2 py-0.5 rounded border border-cyan-500/20 backdrop-blur-sm">
-                            VIEW CERTIFICATE →
-                          </span>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        {/* Subtle motif based on category */}
-                        {item.category === 'hardware' && (
-                          <>
-                            <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:16px_16px]" />
-                            <div className="absolute w-full h-px bg-cyan-400/20 top-1/2 -translate-y-1/2 group-hover:bg-cyan-400/40 transition-colors" />
-                          </>
-                        )}
-                        {item.category === 'hackathon' && (
-                          <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_center,_rgba(139,92,246,0.3)_0%,_transparent_70%)] group-hover:opacity-35 transition-opacity" />
-                        )}
+                    {/* Asset Slot / Thumbnail Preview */}
+                    <div className="w-full h-36 md:h-44 border border-cyan-500/20 bg-navy-950/90 flex items-center justify-center relative overflow-hidden group-hover:border-cyan-400/50 transition-colors mt-auto rounded-[2px]">
+                      {item.image ? (
+                        <>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img 
+                            src={item.image} 
+                            alt={item.title} 
+                            className="w-full h-full object-cover object-center opacity-70 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500" 
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent pointer-events-none" />
+                          
+                          <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[9px] font-mono tracking-widest pointer-events-none">
+                            <span className="text-cyan-300 font-semibold flex items-center gap-1.5 bg-navy-950/90 px-2 py-0.5 rounded border border-cyan-500/30 backdrop-blur-sm">
+                              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                              VERIFIED CREDENTIAL
+                            </span>
+                            <span className="text-gray-300 group-hover:text-cyan-300 transition-colors bg-navy-950/90 px-2 py-0.5 rounded border border-cyan-500/20 backdrop-blur-sm">
+                              VIEW CERTIFICATE →
+                            </span>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {/* Subtle motif based on category */}
+                          {item.category === 'hardware' && (
+                            <>
+                              <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:16px_16px]" />
+                              <div className="absolute w-full h-px bg-cyan-400/20 top-1/2 -translate-y-1/2 group-hover:bg-cyan-400/40 transition-colors" />
+                            </>
+                          )}
+                          {item.category === 'hackathon' && (
+                            <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_center,_rgba(139,92,246,0.3)_0%,_transparent_70%)] group-hover:opacity-35 transition-opacity" />
+                          )}
 
-                        <div className="flex flex-col items-center gap-2 relative z-10">
-                          <span className="text-[10px] font-mono tracking-widest text-cyan-400/70 group-hover:text-cyan-300 transition-colors text-center px-4">
-                            DOCUMENTATION ASSET PENDING
-                          </span>
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  {/* Hover Trace */}
-                  <div className="absolute top-0 left-0 w-full h-px bg-cyan-400/0 group-hover:bg-cyan-400/70 transition-colors duration-500" />
+                          <div className="flex flex-col items-center gap-2 relative z-10">
+                            <span className="text-[10px] font-mono tracking-widest text-cyan-400/70 group-hover:text-cyan-300 transition-colors text-center px-4">
+                              DOCUMENTATION ASSET PENDING
+                            </span>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </TiltCard>
                 </motion.div>
               );
             })}
