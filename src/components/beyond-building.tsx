@@ -37,9 +37,13 @@ export function BeyondBuilding() {
     };
   }, [selectedItem]);
 
-  const filteredData = evidenceData.filter(item => 
-    activeFilter === 'all' ? true : item.category === activeFilter
-  );
+  const filteredData = evidenceData.filter(item => {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'certificate') {
+      return item.category === 'certificate' || Boolean(item.certificateAsset);
+    }
+    return item.category === activeFilter;
+  });
 
   return (
     <section id="beyond" className="py-24 relative bg-transparent">
@@ -96,7 +100,7 @@ export function BeyondBuilding() {
                 >
                   <div className="flex justify-between items-start mb-10 relative z-10">
                     <span className="text-[10px] font-mono tracking-widest text-cyan-400/70 uppercase">
-                      {String(index + 1).padStart(2, '0')} / {item.category}
+                      {String(index + 1).padStart(2, '0')} / {activeFilter === 'certificate' ? 'CERTIFICATE' : item.category}
                     </span>
                     {item.year && (
                       <span className="text-[9px] font-mono tracking-widest text-cyan-300 border border-cyan-400/40 px-2 py-0.5 rounded-sm bg-cyan-500/10">
