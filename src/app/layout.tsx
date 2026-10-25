@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Charan C — ECE Engineer | Hardware × Software × AI × Robotics",
+  title: "Charan C",
   description: "Charan C is a 2nd-year Electronics & Communication Engineering student at VVCE, building multidisciplinary systems across hardware, software, AI, and robotics.",
 };
 
