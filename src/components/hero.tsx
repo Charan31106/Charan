@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { personalInfo } from "@/data/socials";
 import { FaGithub } from "react-icons/fa";
+import { FileText } from "lucide-react";
 import { HeroSystemVisualization } from "./hero-visual";
+import { openResumeModal } from "./resume-modal";
 
 export function Hero() {
   return (
@@ -51,13 +53,20 @@ export function Hero() {
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-4 mt-4">
-            <a href="#systems" className="px-6 py-3 bg-electric-blue text-navy-950 text-sm font-mono tracking-wide hover:bg-electric-blue/90 transition-colors rounded-sm">
+          <div className="flex flex-wrap items-center gap-3.5 mt-4">
+            <a href="#systems" className="px-5 py-3 bg-electric-blue text-navy-950 text-sm font-mono tracking-wide hover:bg-electric-blue/90 transition-colors rounded-sm font-medium">
               Explore Systems
             </a>
-            <a href="https://github.com/Charan31106" target="_blank" rel="noopener noreferrer" className="px-6 py-3 border border-navy-600 text-gray-300 text-sm font-mono tracking-wide hover:text-white hover:border-navy-400 transition-colors rounded-sm flex items-center gap-2">
+            <button
+              onClick={openResumeModal}
+              className="px-5 py-3 bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 hover:bg-cyan-400 hover:text-navy-950 text-sm font-mono tracking-wide transition-all rounded-sm flex items-center gap-2 shadow-[0_0_15px_rgba(34,211,238,0.15)] cursor-pointer"
+            >
+              <FileText className="w-4 h-4" />
+              View Resume
+            </button>
+            <a href="https://github.com/Charan31106" target="_blank" rel="noopener noreferrer" className="px-5 py-3 border border-navy-600 text-gray-300 text-sm font-mono tracking-wide hover:text-white hover:border-navy-400 transition-colors rounded-sm flex items-center gap-2">
               <FaGithub className="w-4 h-4" />
-              View GitHub
+              GitHub
             </a>
           </div>
         </motion.div>

@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { openResumeModal } from "./resume-modal";
 
 const navLinks = [
   { name: "SYSTEMS", href: "#systems", key: "1" },
@@ -110,7 +111,7 @@ export function Navigation() {
         </div>
 
         {/* Desktop Nav - Refined Frosted Glass Capsule */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center gap-3">
           <nav className="flex items-center gap-1 p-1 bg-navy-900/80 border border-cyan-500/25 rounded-full backdrop-blur-xl shadow-[0_4px_24px_rgba(6,14,34,0.5)]">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
@@ -133,6 +134,16 @@ export function Navigation() {
               );
             })}
           </nav>
+
+          {/* Executive Resume Pill */}
+          <button
+            onClick={openResumeModal}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-cyan-500/10 hover:bg-cyan-400 hover:text-navy-950 border border-cyan-400/40 text-cyan-300 font-mono text-xs tracking-wider transition-all duration-200 shadow-[0_0_15px_rgba(34,211,238,0.15)] cursor-pointer"
+            title="View Executive Resume"
+          >
+            <FileText size={13} />
+            <span>RESUME</span>
+          </button>
         </div>
 
         {/* Mobile Toggle */}
@@ -174,6 +185,17 @@ export function Navigation() {
                     </a>
                   );
                 })}
+
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openResumeModal();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 mt-2 rounded-full bg-cyan-400 text-navy-950 font-mono text-xs font-semibold tracking-wider hover:bg-cyan-300 transition-colors shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+                >
+                  <FileText size={14} />
+                  <span>VIEW RESUME // CV</span>
+                </button>
               </div>
 
               <div className="mt-6 flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900 border border-cyan-500/20">

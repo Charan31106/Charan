@@ -8,6 +8,7 @@ import { CurrentlyBuilding } from "@/components/currently-building";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { ECEEngineeringEnvironment } from "@/components/ece-engineering-environment";
+import { ResumeModal } from "@/components/resume-modal";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <CurrentlyBuilding />
       <Contact />
       <Footer />
+      <ResumeModal />
     </main>
   );
 }
